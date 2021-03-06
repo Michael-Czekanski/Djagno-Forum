@@ -15,6 +15,13 @@
         {% endif %}
         <br>
         ---
+        {% if messages %}
+            <p>###</p>
+            {% for message in messages %}
+                <p>{{ message }}</p>
+            {% endfor %}
+            <p>###</p>
+        {% endif %}
         {% block content %}
 
         {% endblock %}
