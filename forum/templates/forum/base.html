@@ -7,7 +7,7 @@
     <body>
         {% if user.is_authenticated %}
             <h2><a href="{% url 'logout' %}">Logout</a></h2>
-            <h2><a href="#">Profile</a></h2>
+            <h2><a href="{% url 'profile' %}">Profile</a></h2>
         {% else %}
             <h2><a href="{% url 'forum-home' %}">Home</a></h2>
             <h2><a href="{% url 'register' %}">Register</a></h2>
