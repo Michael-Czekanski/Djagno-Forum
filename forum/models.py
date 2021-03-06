@@ -14,3 +14,4 @@ class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, models.SET_NULL, null=True)
+    topic = models.ForeignKey(Topic, models.CASCADE)
