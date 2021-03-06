@@ -1,4 +1,8 @@
 {% extends "forum/base.html" %}
 {% block content %}
-<h1>Forum</h1>
+    {% for topic in topics %}
+        <h2><a href="#">{{ topic.name }}</a></h2>
+        <p>by <a href="#">{{ topic.created_by.username }}</a></p>
+        <p>{{ topic.creation_date | date:"d M Y H:i" }}</p>
+    {% endfor %}
 {% endblock content %}
