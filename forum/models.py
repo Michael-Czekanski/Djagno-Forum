@@ -15,3 +15,6 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, models.SET_NULL, null=True)
     topic = models.ForeignKey(Topic, models.CASCADE)
+
+    def __str__(self):
+        return f'{self.topic.name}, {self.author.username}: {self.content[:10]} ...'
