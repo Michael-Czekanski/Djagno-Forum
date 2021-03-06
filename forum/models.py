@@ -17,4 +17,7 @@ class Post(models.Model):
     topic = models.ForeignKey(Topic, models.CASCADE)
 
     def __str__(self):
-        return f'{self.topic.name}, {self.author.username}: {self.content[:10]} ...'
+        result = f'{self.topic.name}, {self.author.username}: {self.content[:10]}'
+        if len(self.content) > 10:
+            result += ' ...'
+        return result
