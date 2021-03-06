@@ -7,6 +7,9 @@ class Topic(models.Model):
     creation_date = models.DateField(default=timezone.now)
     created_by = models.ForeignKey(User, models.SET_NULL, null=True)
 
+    def __str__(self):
+        return self.name
+
 class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
