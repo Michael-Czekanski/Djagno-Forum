@@ -13,7 +13,7 @@
             <h2><a href="{% url 'register' %}">Register</a></h2>
             <h2><a href="{% url 'login' %}">Log In</a></h2>
         {% endif %}
-        <p>---</p>
+        <hr>
         {% if messages %}
             <p>###</p>
             {% for message in messages %}
