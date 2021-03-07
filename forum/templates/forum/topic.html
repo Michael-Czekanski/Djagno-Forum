@@ -1,4 +1,10 @@
 {% extends "forum/base.html" %}
 {% block content %}
 <h1>{{ topic.name }}</h1>
+{% for post in posts %}
+    <div>
+        <p style="color:#555555">{{ post.content }}</p>
+        <small><a href="#">{{ post.author }}</a>, {{ post.date_posted }}</small>
+    </div>
+{% endfor %}
 {% endblock content %}

@@ -14,8 +14,15 @@ def about(request):
 
 def topic(request, topic_id):
     try:
-        t = Topic.objects.get(pk=topic_id)
+        topic = Topic.objects.get(pk=topic_id)
     except Topic.DoesNotExist:
         raise Http404("Topic does not exist")
 
-    return render(request, 'forum/topic.html', {'topic': t})
+    posts = topic.post_set.all()
+
+    content = {
+        'topic': topic,
+        'posts': posts
+    }
+
+    return render(request, 'forum/topic.html', content)
