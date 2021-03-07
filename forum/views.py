@@ -5,7 +5,7 @@ from .models import Topic
 def home(request):
 
     content = {
-        'topics': Topic.objects.all()
+        'topics': Topic.objects.order_by('-creation_date')
     }
     return render(request, 'forum/home.html', content)
 
