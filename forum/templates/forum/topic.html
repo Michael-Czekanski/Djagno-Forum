@@ -2,9 +2,12 @@
 {% block content %}
 <h1>{{ topic.name }}</h1>
 {% for post in posts %}
-    <div>
+    <div style="margin:10px; margin-bottom:100px">
         <p style="color:#555555">{{ post.content }}</p>
-        <small><a href="#">{{ post.author }}</a>, {{ post.date_posted }}</small>
+        <p>{{ post.date_posted }}</p>
+        <img src="{{ post.author.profile.image.url }}" alt="pic" style="float:left;width:50px">
+        <a href="#">{{ post.author }}</a>
+
     </div>
 {% endfor %}
 {% endblock content %}
