@@ -1,7 +1,7 @@
 {% extends "forum/base.html" %}
 {% block content %}
     {% for topic in topics %}
-        <h2><a href="#">{{ topic.name }}</a></h2>
+        <h2><a href="{% url 'forum-topic' topic_id=topic.id %}">{{ topic.name }}</a></h2>
         <p>by <a href="#">{{ topic.created_by.username }}</a></p>
         <p>{{ topic.creation_date | date:"d M Y H:i" }}</p>
     {% endfor %}
