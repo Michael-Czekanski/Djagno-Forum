@@ -21,3 +21,9 @@ class Post(models.Model):
         if len(self.content) > 10:
             result += ' ...'
         return result
+
+    def content_short(self):
+        if len(self.content) < 10:
+            return self.content
+        else:
+            return self.content[:10] + ' ...'
