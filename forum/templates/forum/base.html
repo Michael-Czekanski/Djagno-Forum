@@ -9,6 +9,7 @@
         {% if user.is_authenticated %}
             <h2><a href="{% url 'logout' %}">Logout</a></h2>
             <h2><a href="{% url 'profile' %}">Profile</a></h2>
+            <h2><a href="{% url 'topic-create' %}">New Topic</a></h2>
         {% else %}
             <h2><a href="{% url 'register' %}">Register</a></h2>
             <h2><a href="{% url 'login' %}">Log In</a></h2>
