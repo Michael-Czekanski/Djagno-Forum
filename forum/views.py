@@ -22,9 +22,21 @@ def topic(request, topic_id):
 
     posts = topic.post_set.all()
 
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            post_form = PostCreateForm(request.POST, user=request.user, topic=topic)
+            if post_form.is_valid():
+                post_form.save()
+                return redirect('forum-topic', topic_id=topic_id)
+        else:
+            post_form = PostCreateForm(user=request.user, topic=topic)
+    else:
+        post_form = None
+
     content = {
         'topic': topic,
-        'posts': posts
+        'posts': posts,
+        'post_form': post_form
     }
 
     return render(request, 'forum/topic.html', content)

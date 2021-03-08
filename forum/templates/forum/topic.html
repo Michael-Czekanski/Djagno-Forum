@@ -10,4 +10,17 @@
 
     </div>
 {% endfor %}
+
+<hr>
+{% if user.is_authenticated %}
+    <legend>Post a comment</legend>
+    <form method="post">
+        {% csrf_token %}
+        {{ post_form.as_p }}
+        <button type="submit">Post</button>
+    </form>
+
+{% else %}
+    <legend>Please <a href="{% url 'login' %}">login</a> to post a comment.</legend>
+{% endif %}
 {% endblock content %}
