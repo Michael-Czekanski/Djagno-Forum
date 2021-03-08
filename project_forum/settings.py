@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'crispy_forms',
     'forum.apps.ForumConfig',
     'users.apps.UsersConfig',
     'django.contrib.admin',
@@ -128,3 +129,5 @@ MEDIA_URL = '/media/'
 
 LOGIN_REDIRECT_URL = 'forum-home'
 LOGIN_URL = 'login'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
