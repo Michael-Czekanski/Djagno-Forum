@@ -4,7 +4,7 @@
 {% for post in posts %}
     <div style="margin:10px; margin-bottom:100px">
         <p style="color:#555555">{{ post.content }}</p>
-        <p>{{ post.date_posted }}</p>
+        <p>{{ post.date_posted | date:"d M Y H:i" }}</p>
         <img src="{{ post.author.profile.image.url }}" alt="pic" style="float:left;width:50px">
         <a href="#">{{ post.author }}</a>
 
