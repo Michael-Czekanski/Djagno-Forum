@@ -21,6 +21,6 @@
     </form>
 
 {% else %}
-    <legend>Please <a href="{% url 'login' %}">login</a> to post a comment.</legend>
+    <legend>Please <a href="{% url 'login' %}?next={{ request.get_full_path }}">login</a> to post a comment.</legend>
 {% endif %}
 {% endblock content %}
