@@ -1,8 +1,9 @@
 {% extends "forum/base.html" %}
 {% block content %}
-    {% for topic in topics %}
+    {% for topic, latest_post in topics_with_latest_posts %}
         <h2><a href="{% url 'forum-topic' topic_id=topic.id %}">{{ topic.name }}</a></h2>
-        <p>by <a href="#">{{ topic.created_by.username }}</a></p>
-        <p>{{ topic.creation_date | date:"d M Y H:i" }}</p>
+        <p>Latest post</p>
+        <p>by <a href="#">{{ latest_post.author.username }}</a></p>
+        <p>{{ latest_post.date_posted | date:"d M Y H:i" }}</p>
     {% endfor %}
 {% endblock content %}
