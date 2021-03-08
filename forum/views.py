@@ -1,6 +1,7 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import Http404
 from .models import Topic
+from .forms import TopicCreateForm, PostCreateForm
 
 def home(request):
 
@@ -26,3 +27,21 @@ def topic(request, topic_id):
     }
 
     return render(request, 'forum/topic.html', content)
+
+def topic_create(request):
+    if request.method == 'POST':
+        topic_form = TopicCreateForm(request.POST, user=request.user)
+        post_form = PostCreateForm(request.POST, user=request.user, topic=topic_form.instance)
+        if topic_form.is_valid() and post_form.is_valid():
+            topic_form.save()
+            post_form.save()
+            return redirect('forum-topic', topic_id=topic_form.instance.id)
+    else:
+        topic_form = TopicCreateForm(user=request.user)
+        post_form = PostCreateForm(user=request.user, topic=topic_form.instance)
+
+    content = {
+        'topic_form': topic_form,
+        'post_form': post_form
+    }
+    return render(request, 'forum/topic_create.html', content)
