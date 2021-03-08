@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import Http404
+from django.contrib.auth.decorators import login_required
 from .models import Topic
 from .forms import TopicCreateForm, PostCreateForm
 
@@ -28,6 +29,7 @@ def topic(request, topic_id):
 
     return render(request, 'forum/topic.html', content)
 
+@login_required
 def topic_create(request):
     if request.method == 'POST':
         topic_form = TopicCreateForm(request.POST, user=request.user)
