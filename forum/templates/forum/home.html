@@ -1,5 +1,6 @@
 {% extends "forum/base.html" %}
 {% block content %}
+<h1>Topics</h1>
     {% for topic, latest_post in topics_with_latest_posts %}
         <h2><a href="{% url 'forum-topic' topic_id=topic.id %}">{{ topic.name }}</a></h2>
         <p>Latest post</p>
