@@ -1,10 +1,33 @@
 {% extends "forum/base.html" %}
 {% block content %}
-<h1>Topics</h1>
+
+<table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Topic</th>
+        <th>Last Post</th>
+        <th>Posts</th>
+      </tr>
+    </thead>
+    <tbody>
     {% for topic, latest_post in topics_with_latest_posts %}
-        <h2><a href="{% url 'forum-topic' topic_id=topic.id %}">{{ topic.name }}</a></h2>
-        <p>Latest post</p>
-        <p>by <a href="#">{{ latest_post.author.username }}</a></p>
-        <p>{{ latest_post.date_posted | date:"d M Y H:i" }}</p>
+    <tr>
+      <td class="col-sm-7">
+          <a href="{% url 'forum-topic' topic_id=topic.id %}">{{ topic.name }}</a>
+      </td>
+      <td class="col-sm-4">
+          <p>{{ latest_post.content_short }}</p>
+          <p>
+              by <a href="#">{{ latest_post.author.username }}</a>,
+              {{ latest_post.date_posted | date:"d M Y H:i" }}
+          </p>
+      </td>
+      <td class="col-sm-1">100</td>
+    </tr>
     {% endfor %}
+    </tbody>
+  </table>
+
+
+
 {% endblock content %}
