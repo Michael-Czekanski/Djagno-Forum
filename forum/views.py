@@ -5,13 +5,9 @@ from .models import Topic
 from .forms import TopicCreateForm, PostCreateForm
 
 def home(request):
-    topics_with_latest_posts = []
-    for topic in Topic.objects.order_by('-creation_date'):
-        latest_post = topic.post_set.order_by('-date_posted').first()
-        topics_with_latest_posts.append((topic, latest_post))
-
+    topics = Topic.objects.order_by('-creation_date')
     content = {
-        'topics_with_latest_posts': topics_with_latest_posts
+        'topics': topics
     }
     return render(request, 'forum/home.html', content)
 
