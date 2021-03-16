@@ -10,19 +10,19 @@
       </tr>
     </thead>
     <tbody>
-    {% for topic, latest_post in topics_with_latest_posts %}
+    {% for topic in topics %}
     <tr>
       <td class="col-sm-7">
           <a href="{% url 'forum-topic' topic_id=topic.id %}">{{ topic.name }}</a>
       </td>
       <td class="col-sm-4">
-          <p>{{ latest_post.content_short }}</p>
+          <p>{{ topic.get_latest_post.content_short }}</p>
           <p>
-              by <a href="#">{{ latest_post.author.username }}</a>,
-              {{ latest_post.date_posted | date:"d M Y H:i" }}
+              by <a href="#">{{ topic.get_latest_post.author.username }}</a>,
+              {{ topic.get_latest_post.date_posted | date:"d M Y H:i" }}
           </p>
       </td>
-      <td class="col-sm-1">100</td>
+      <td class="col-sm-1"> {{ topic.get_posts_count }}</td>
     </tr>
     {% endfor %}
     </tbody>
