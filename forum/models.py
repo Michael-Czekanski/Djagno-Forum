@@ -14,8 +14,15 @@ class Topic(models.Model):
         """
         Returns latest post from this topic.
         """
-        
+
         return self.post_set.order_by('-date_posted').first()
+
+    def get_posts_count(self):
+        """
+        Returns topic's posts count.
+        """
+
+        return self.post_set.count()
 
 class Post(models.Model):
     content = models.TextField()
