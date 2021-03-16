@@ -10,6 +10,13 @@ class Topic(models.Model):
     def __str__(self):
         return self.name
 
+    def get_latest_post(self):
+        """
+        Returns latest post from this topic.
+        """
+        
+        return self.post_set.order_by('-date_posted').first()
+
 class Post(models.Model):
     content = models.TextField()
     date_posted = models.DateTimeField(default=timezone.now)
