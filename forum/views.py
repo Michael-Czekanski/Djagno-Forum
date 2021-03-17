@@ -27,6 +27,10 @@ def topic(request, topic_id):
         raise Http404("Topic does not exist")
 
     posts = topic.post_set.all()
+    paginator = Paginator(posts, 4)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
 
     if request.user.is_authenticated:
         if request.method == 'POST':
@@ -41,7 +45,7 @@ def topic(request, topic_id):
 
     context = {
         'topic': topic,
-        'posts': posts,
+        'page_obj': page_obj,
         'post_form': post_form
     }
 
