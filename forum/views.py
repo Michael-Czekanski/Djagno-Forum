@@ -25,7 +25,7 @@ def topic(request, topic_id):
     except Topic.DoesNotExist:
         raise Http404("Topic does not exist")
 
-    posts = topic.post_set.all()
+    posts = topic.post_set.order_by('date_posted')
     paginator = Paginator(posts, 4)
 
     page_number = request.GET.get('page')
