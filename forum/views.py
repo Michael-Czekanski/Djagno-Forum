@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
 from .models import Topic
@@ -6,8 +7,13 @@ from .forms import TopicCreateForm, PostCreateForm
 
 def home(request):
     topics = Topic.objects.order_by('-creation_date')
+    paginator = Paginator(topics, 5)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
     context = {
-        'topics': topics
+        'topics': topics,
+        'page_obj': page_obj
     }
     return render(request, 'forum/home.html', context)
 
