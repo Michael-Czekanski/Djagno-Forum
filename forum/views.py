@@ -6,10 +6,10 @@ from .forms import TopicCreateForm, PostCreateForm
 
 def home(request):
     topics = Topic.objects.order_by('-creation_date')
-    content = {
+    context = {
         'topics': topics
     }
-    return render(request, 'forum/home.html', content)
+    return render(request, 'forum/home.html', context)
 
 def about(request):
     return render(request, 'forum/about.html')
@@ -33,13 +33,13 @@ def topic(request, topic_id):
     else:
         post_form = None
 
-    content = {
+    context = {
         'topic': topic,
         'posts': posts,
         'post_form': post_form
     }
 
-    return render(request, 'forum/topic.html', content)
+    return render(request, 'forum/topic.html', context)
 
 @login_required
 def topic_create(request):
@@ -54,8 +54,8 @@ def topic_create(request):
         topic_form = TopicCreateForm(user=request.user)
         post_form = PostCreateForm(user=request.user, topic=topic_form.instance)
 
-    content = {
+    context = {
         'topic_form': topic_form,
         'post_form': post_form
     }
-    return render(request, 'forum/topic_create.html', content)
+    return render(request, 'forum/topic_create.html', context)
