@@ -28,7 +28,7 @@
     {% for post in page_obj %}
         <div style="margin:10px; margin-bottom:100px" id="{{ post.post_number }}">
             <p>Posted on
-                <a href="{% url 'forum-topic' topic_id=post.topic.id %}">
+                <a href="{% url 'forum-topic' topic_id=post.topic.id %}?post={{ post.post_number }}">
                     {{ post.topic.name }}
                 </a>
 
