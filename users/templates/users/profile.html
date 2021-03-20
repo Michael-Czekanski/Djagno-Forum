@@ -1,20 +1,60 @@
 {% extends "forum/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
+
+<!-- Profile info -->
 <img src="{{ user.profile.image.url }}" alt="profile_pic">
 <h1>{{user.username}}</h1>
 <p>{{user.email}}</p>
+
+<!-- Update profile -->
+{% if u_form and p_form %}
 <div>
     <hr>
-    {% if u_form and p_form %}
-        <h3>Update your profile</h3>
-        <form method="post" enctype="multipart/form-data">
-            {% csrf_token %}
-            {{ u_form|crispy }}
-            {{ p_form|crispy }}
-            <button type="submit">Update</button>
-        </form>
-    {% endif %}
-
+    <h3>Update your profile</h3>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ u_form|crispy }}
+        {{ p_form|crispy }}
+        <button type="submit">Update</button>
+    </form>
 </div>
+{% endif %}
+
+<!-- Posts -->
+<div>
+    <hr>
+    <h2>Posts</h2>
+    {% for post in page_obj %}
+        <div style="margin:10px; margin-bottom:100px" id="{{ post.post_number }}">
+            <p>Posted on
+                <a href="{% url 'forum-topic' topic_id=post.topic.id %}">
+                    {{ post.topic.name }}
+                </a>
+
+            </p>
+            <p style="color:#555555">{{ post.content }}</p>
+            <p>{{ post.date_posted | date:"d M Y H:i" }}</p>
+        </div>
+    {% endfor %}
+
+    <div class="pagination">
+        <span class="step-links">
+            {% if page_obj.has_previous %}
+                <a href="?page=1">&laquo; first</a>
+                <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+            {% endif %}
+
+            <span class="current">
+                Page {{ page_obj.number}} of {{ page_obj.paginator.num_pages }}.
+            </span>
+
+            {% if page_obj.has_next %}
+                <a href="?page={{ page_obj.next_page_number }}">next</a>
+                <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+            {% endif %}
+        </span>
+    </div>
+</div>
+
 {% endblock content %}
