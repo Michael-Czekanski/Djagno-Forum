@@ -29,12 +29,26 @@ class Post(models.Model):
     date_posted = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(User, models.SET_NULL, null=True)
     topic = models.ForeignKey(Topic, models.CASCADE)
+    post_number = models.IntegerField(editable=False)
+
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['topic', 'post_number'],
+            name='unique_topic_post_num')
+        ]
+
+
+    def save(self, *args, **kwargs):
+        self.post_number = self.topic.get_posts_count() + 1
+        super().save(*args, **kwargs)
+
 
     def __str__(self):
         result = f'{self.topic.name}, {self.author.username}: {self.content[:10]}'
         if len(self.content) > 10:
             result += ' ...'
         return result
+
 
     def content_short(self):
         if len(self.content) < 10:
