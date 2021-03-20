@@ -18,7 +18,9 @@
       <td class="col-sm-4">
           <p>{{ topic.get_latest_post.content_short }}</p>
           <p>
-              by <a href="#">{{ topic.get_latest_post.author.username }}</a>,
+              by <a href="{% url 'users-profile' user_id=topic.get_latest_post.author.id %}">
+                  {{ topic.get_latest_post.author.username }}
+              </a>,
               {{ topic.get_latest_post.date_posted | date:"d M Y H:i" }}
           </p>
       </td>

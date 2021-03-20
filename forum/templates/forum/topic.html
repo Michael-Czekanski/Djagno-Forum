@@ -8,7 +8,7 @@
         <p style="color:#555555">{{ post.content }}</p>
         <p>{{ post.date_posted | date:"d M Y H:i" }}</p>
         <img src="{{ post.author.profile.image.url }}" alt="pic" style="float:left;width:50px">
-        <a href="#">{{ post.author }}</a>
+        <a href="{% url 'users-profile' user_id=post.author.id %}">{{ post.author }}</a>
 
     </div>
 {% endfor %}
