@@ -3,7 +3,8 @@
 {% block content %}
 <h1>{{ topic.name }}</h1>
 {% for post in page_obj %}
-    <div style="margin:10px; margin-bottom:100px">
+    <div style="margin:10px; margin-bottom:100px" id="{{ post.post_number }}">
+        <p style="color:#555555">#{{ post.post_number }}</p>
         <p style="color:#555555">{{ post.content }}</p>
         <p>{{ post.date_posted | date:"d M Y H:i" }}</p>
         <img src="{{ post.author.profile.image.url }}" alt="pic" style="float:left;width:50px">
