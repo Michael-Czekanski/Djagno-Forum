@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.http import Http404
 from django.contrib.auth.decorators import login_required
@@ -20,10 +20,7 @@ def about(request):
     return render(request, 'forum/about.html')
 
 def topic(request, topic_id):
-    try:
-        topic = Topic.objects.get(pk=topic_id)
-    except Topic.DoesNotExist:
-        raise Http404("Topic does not exist")
+    topic = get_object_or_404(Topic, pk=topic_id)
 
     posts = topic.post_set.order_by('date_posted')
     paginator = Paginator(posts, 4)

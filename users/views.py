@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -32,10 +32,7 @@ def profile(request, user_id=None):
             u_form = UserUpdateForm(instance=request.user)
             p_form = ProfileUpdateForm(instance=request.user.profile)
     else:
-        try:
-            user = User.objects.get(pk=user_id)
-        except User.DoesNotExist:
-            raise Http404("User does not exist")
+        user = get_object_or_404(User, pk=user_id)
         u_form = None
         p_form = None
 
