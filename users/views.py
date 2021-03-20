@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.core.paginator import Paginator
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegisterForm, UserUpdateForm, ProfileUpdateForm
@@ -38,8 +39,16 @@ def profile(request, user_id=None):
         u_form = None
         p_form = None
 
+    posts = user.post_set.order_by('date_posted')
+    paginator = Paginator(posts, 4)
+
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+
+
     context = {
         'user': user,
+        'page_obj': page_obj,
         'u_form': u_form,
         'p_form': p_form
     }
