@@ -39,7 +39,7 @@ def profile(request, user_id=None):
         u_form = None
         p_form = None
 
-    posts = user.post_set.order_by('date_posted')
+    posts = user.post_set.order_by('-date_posted')
     paginator = Paginator(posts, 4)
 
     page_number = request.GET.get('page')
