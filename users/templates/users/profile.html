@@ -6,12 +6,15 @@
 <p>{{user.email}}</p>
 <div>
     <hr>
-    <h3>Update your profile</h3>
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
-        {{ u_form|crispy }}
-        {{ p_form|crispy }}
-        <button type="submit">Update</button>
-    </form>
+    {% if u_form and p_form %}
+        <h3>Update your profile</h3>
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ u_form|crispy }}
+            {{ p_form|crispy }}
+            <button type="submit">Update</button>
+        </form>
+    {% endif %}
+
 </div>
 {% endblock content %}
