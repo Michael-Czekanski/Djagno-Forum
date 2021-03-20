@@ -48,8 +48,11 @@ def topic(request, topic_id):
         if request.method == 'POST':
             post_form = PostCreateForm(request.POST, user=request.user, topic=topic)
             if post_form.is_valid():
-                post_form.save()
-                return redirect('forum-topic', topic_id=topic_id)
+                new_post = post_form.save()
+                return redirect(
+                    f'{request.path}?post={new_post.post_number}',
+                    topic_id=topic_id
+                )
         else:
             post_form = PostCreateForm(user=request.user, topic=topic)
     else:
