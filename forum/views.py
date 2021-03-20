@@ -28,6 +28,19 @@ def topic(request, topic_id):
     posts = topic.post_set.order_by('date_posted')
     paginator = Paginator(posts, 4)
 
+
+    post_num = request.GET.get('post')
+    if post_num: # Redirect to page with given post
+        post_num = int(post_num)
+        for page_num in paginator.page_range:
+            page = paginator.get_page(page_num)
+            # If given post is in this page, redirect to this page
+            if any([p.post_number == post_num for p in page.object_list]):
+                break
+        return redirect(f'{request.path}?page={page_num}#{post_num}')
+
+
+
     page_number = request.GET.get('page')
     page_obj = paginator.get_page(page_number)
 
