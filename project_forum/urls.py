@@ -35,6 +35,13 @@ urlpatterns = [
         ),
         name='password-reset'
     ),
+    path(
+        'password-reset/password-reset-done/',
+        auth_views.PasswordResetDoneView.as_view(
+            template_name='users/password_reset_done.html'
+        ),
+        name='password-reset-done'
+    ),
     path('users/', include('users.urls')),
     path('', include('forum.urls')),
 ]
